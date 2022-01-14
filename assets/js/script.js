@@ -1,4 +1,4 @@
-var drink = "rum";
+var drink = "vermouth";
 
 const drinkApi = {
 	"async": true,
