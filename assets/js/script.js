@@ -18,21 +18,31 @@ var drinks = [];
 // $.ajax(drinkApi).done(function (response) {
 // 	console.log(response);
 // });
+// function to load meal ID
+function loadMealId(input) {
+    var mealID = ""
+    var inputIngred = input;
+    const mealApi = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://themealdb.p.rapidapi.com/filter.php?i=" + inputIngred,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "themealdb.p.rapidapi.com",
+            "x-rapidapi-key": "d1da64892bmsh47c5b4a3453cdaap15ba00jsn958f359ad4d3"
+        }
+    };
+    $.ajax(mealApi).done(function (response) {
+        var randomMealNum = Math.floor((Math.random() * response.meals.length));
+        console.log(response.meals[randomMealNum].idMeal);
+        mealID = response.meals[randomMealNum].idMeal
 
-// const mealApi = {
-// 	"async": true,
-// 	"crossDomain": true,
-// 	"url": "https://themealdb.p.rapidapi.com/filter.php?i=chicken",
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "themealdb.p.rapidapi.com",
-// 		"x-rapidapi-key": "d1da64892bmsh47c5b4a3453cdaap15ba00jsn958f359ad4d3"
-// 	}
-// };
+        <SOME_FUNCTION_HERE>(mealid) {
+            }
+    });
+};
 
-// $.ajax(mealApi).done(function (response) {
-// 	console.log(response);
-// });
+
 
 //  function to create meal buttons
 function createMealButtons() {
@@ -46,7 +56,6 @@ function createMealButtons() {
         $("#logMeal").append(savedMeal);
     }
 };
-
 // function to create drink buttons
 function createDrinkButtons() {
     $('#inputDrink').val("");
@@ -85,47 +94,42 @@ function loadDrinks() {
         createDrinkButtons();
     }
 };
-
-
-
 // collect inputted meal search
-$('#mealForm').on('submit', function(event)  {
+$('#mealForm').on('submit', function (event) {
     event.preventDefault();
-    if (mealSearch.val())  {
+    if (mealSearch.val()) {
         var mealInput = mealSearch.val();
         meals.push(mealInput);
         saveMeals();
         createMealButtons();
-        //loadMealId(mealInput);
-        console.log(meals);
-    }  else  {
+        loadMealId(mealInput);
+    } else {
         console.log("Temporary Error");
     }
 });
-
 // collect inputted drink search
-$('#drinkForm').on('submit', function(event)  {
+$('#drinkForm').on('submit', function (event) {
     event.preventDefault();
-    if (drinkSearch.val())  {
+    if (drinkSearch.val()) {
         var drinkInput = drinkSearch.val();
         drinks.push(drinkInput);
         saveDrinks();
         createDrinkButtons();
-        //loadMealId(mealInput);
+        //loadDrinkId(mealInput);
         console.log(drinks);
-    }  else  {
+    } else {
         console.log("Temporary Error");
     }
 });
 // listener for delete meals button
-$('#deleteMeal').on("click", function(event)  {
+$('#deleteMeal').on("click", function (event) {
     event.preventDefault();
     $('#logMeal').empty();
     meals = [];
     localStorage.setItem('meals', JSON.stringify(meals));
 })
 // listener for delete drinks button
-$('#deleteDrink').on("click", function(event)  {
+$('#deleteDrink').on("click", function (event) {
     event.preventDefault();
     $('#logDrink').empty();
     drinks = [];
