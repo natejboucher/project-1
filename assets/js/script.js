@@ -20,7 +20,7 @@ var drinks = [];
 // });
 // function to load meal ID
 function loadMealId(input) {
-    var mealID = ""
+    var mealID = "";
     var inputIngred = input;
     const mealApi = {
         "async": true,
@@ -34,26 +34,76 @@ function loadMealId(input) {
     };
     $.ajax(mealApi).done(function (response) {
         var randomMealNum = Math.floor((Math.random() * response.meals.length));
-        console.log(response.meals[randomMealNum].idMeal);
-        mealID = response.meals[randomMealNum].idMeal
+        mealId = response.meals[randomMealNum].idMeal;
+        loadMealRecipe(mealId);
+    });
+};
+function loadSavedMeal(name) {
+    const settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://themealdb.p.rapidapi.com/search.php?s=" + name,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "themealdb.p.rapidapi.com",
+            "x-rapidapi-key": "d1da64892bmsh47c5b4a3453cdaap15ba00jsn958f359ad4d3"
+        }
+    };
 
-        <SOME_FUNCTION_HERE>(mealid) {
-            }
+    $.ajax(settings).done(function (response) {
+        $('#mealRecipeName').empty();
+        $('#mealInstructions').empty();
+        $('#mealPic').empty();
+        console.log(response);
+        var mealName = response.meals[0].strMeal;
+        var mealPic = response.meals[0].strMealThumb;
+        var mealInstructions = response.meals[0].strInstructions
+        mealRecipeEl(mealName, mealPic, mealInstructions);
     });
 };
 
+// function to load meal recipe
+function loadMealRecipe(mealId) {
+    const settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://themealdb.p.rapidapi.com/lookup.php?i=" + mealId,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "themealdb.p.rapidapi.com",
+            "x-rapidapi-key": "d1da64892bmsh47c5b4a3453cdaap15ba00jsn958f359ad4d3"
+        }
+    };
 
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        var mealName = response.meals[0].strMeal;
+        var mealPic = response.meals[0].strMealThumb;
+        var mealInstructions = response.meals[0].strInstructions
+        meals.push(mealName);
+        saveMeals();
+        createMealButtons();
+        mealRecipeEl(mealName, mealPic, mealInstructions);
+    });
+};
+// function to display recipe info on page
+function mealRecipeEl(name, thumb, instructions) {
+    $('#mealRecipeName').text(name);
+    $('#mealInstructions').text(instructions)
+    var mealPicture = $('<img>').addClass('img').attr('src', thumb);
+    $('#mealPic').append(mealPicture);
+}
 
 //  function to create meal buttons
-function createMealButtons() {
+function createMealButtons(mealName) {
     $('#inputMeal').val("");
     $('#logMeal').empty();
     for (var i = 0; i < meals.length; i++) {
-        var savedMeal = $("<button>")
-            .addClass('button is-primary is-outlined control m-1')
+        var savedMealBtn = $("<button>")
+            .addClass('button is-primary is-outlined control m-1 wrap-button-text')
             .text(meals[i])
-            .attr('id', 'savedMeal');
-        $("#logMeal").append(savedMeal);
+            .attr('id', 'savedMeal')
+        $("#logMeal").append(savedMealBtn);
     }
 };
 // function to create drink buttons
@@ -62,9 +112,9 @@ function createDrinkButtons() {
     $('#logDrink').empty();
     for (var i = 0; i < drinks.length; i++) {
         var savedDrinks = $("<button>")
-            .addClass('button is-primary is-outlined control m-1')
+            .addClass('button is-primary is-outlined control m-1 wrap-button-text')
             .text(drinks[i])
-            .attr('id', 'savedMeal');
+            .attr('id', 'savedDrink');
         $("#logDrink").append(savedDrinks);
     }
 };
@@ -99,9 +149,6 @@ $('#mealForm').on('submit', function (event) {
     event.preventDefault();
     if (mealSearch.val()) {
         var mealInput = mealSearch.val();
-        meals.push(mealInput);
-        saveMeals();
-        createMealButtons();
         loadMealId(mealInput);
     } else {
         console.log("Temporary Error");
@@ -136,6 +183,12 @@ $('#deleteDrink').on("click", function (event) {
     localStorage.setItem('drinks', JSON.stringify(drinks));
 })
 
+// listener for saved meals buttons
+$('#logMeal').on('click', 'button', function (event) {
+    var savedName = $(this).text().trim();
+    console.log(savedName);
+    loadSavedMeal(savedName);
+});
 loadMeals();
 loadDrinks();
 
