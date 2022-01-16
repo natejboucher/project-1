@@ -120,7 +120,7 @@ function createDrinkButtons() {
 };
 
 // load drink id from searched ingredient
-function loadDrinkId(input)  {
+function loadDrinkId(input) {
     var drinkID = "";
     var inputIngred = input;
     const settings = {
@@ -133,7 +133,7 @@ function loadDrinkId(input)  {
             "x-rapidapi-key": "d1da64892bmsh47c5b4a3453cdaap15ba00jsn958f359ad4d3"
         }
     };
-    
+
     $.ajax(settings).done(function (response) {
         var randomDrinkNum = Math.floor((Math.random() * response.drinks.length));
         drinkId = response.drinks[randomDrinkNum].idDrink;
@@ -142,7 +142,7 @@ function loadDrinkId(input)  {
     });
 };
 // load meal recipe
-function loadDrinkRecipe(id)  {
+function loadDrinkRecipe(id) {
     const settings = {
         "async": true,
         "crossDomain": true,
@@ -153,7 +153,7 @@ function loadDrinkRecipe(id)  {
             "x-rapidapi-key": "d1da64892bmsh47c5b4a3453cdaap15ba00jsn958f359ad4d3"
         }
     };
-    
+
     $.ajax(settings).done(function (response) {
         $('#drinkRecipeName').empty();
         $('#drinkInstructions').empty();
@@ -165,7 +165,7 @@ function loadDrinkRecipe(id)  {
     });
 };
 // display information on drink el
-function drinkRecipeEl(name, thumb, inst)  {
+function drinkRecipeEl(name, thumb, inst) {
     $('#drinkRecipeName').text(name);
     var drinkPicture = $('<img>').addClass('img').attr('src', thumb);
     var drinkVid = inst;
@@ -236,4 +236,3 @@ $('#logDrink').on('click', 'button', function (event) {
 });
 loadMeals();
 loadDrinks();
-
