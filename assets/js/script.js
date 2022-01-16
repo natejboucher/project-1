@@ -3,22 +3,7 @@ var drinkSearch = $('#inputDrink');
 var meals = [];
 var drinks = [];
 
-
-// const drinkApi = {
-// 	"async": true,
-// 	"crossDomain": true,
-// 	"url": "https://the-cocktail-db.p.rapidapi.com/filter.php?i=" + drink,
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
-// 		"x-rapidapi-key": "d1da64892bmsh47c5b4a3453cdaap15ba00jsn958f359ad4d3"
-// 	}
-// };
-
-// $.ajax(drinkApi).done(function (response) {
-// 	console.log(response);
-// });
-// function to load meal ID
+// load meal id from searched ingredient
 function loadMealId(input) {
     var mealID = "";
     var inputIngred = input;
@@ -38,6 +23,7 @@ function loadMealId(input) {
         loadMealRecipe(mealId);
     });
 };
+// load saved meals from buttons
 function loadSavedMeal(name) {
     const settings = {
         "async": true,
@@ -54,14 +40,12 @@ function loadSavedMeal(name) {
         $('#mealRecipeName').empty();
         $('#mealInstructions').empty();
         $('#mealPic').empty();
-        console.log(response);
         var mealName = response.meals[0].strMeal;
         var mealPic = response.meals[0].strMealThumb;
-        var mealInstructions = response.meals[0].strInstructions
-        mealRecipeEl(mealName, mealPic, mealInstructions);
+        var mealLink = response.meals[0].strYoutube;
+        mealRecipeEl(mealName, mealPic, mealLink);
     });
 };
-
 // function to load meal recipe
 function loadMealRecipe(mealId) {
     const settings = {
@@ -76,10 +60,12 @@ function loadMealRecipe(mealId) {
     };
 
     $.ajax(settings).done(function (response) {
-        console.log(response);
+        $('#mealRecipeName').empty();
+        $('#mealInstructions').empty();
+        $('#mealPic').empty();
         var mealName = response.meals[0].strMeal;
         var mealPic = response.meals[0].strMealThumb;
-        var mealInstructions = response.meals[0].strInstructions
+        var mealLink = response.meals[0].strYoutube;
         meals.push(mealName);
         saveMeals();
         createMealButtons();
@@ -87,13 +73,13 @@ function loadMealRecipe(mealId) {
     });
 };
 // function to display recipe info on page
-function mealRecipeEl(name, thumb, instructions) {
+function mealRecipeEl(name, thumb, link) {
     $('#mealRecipeName').text(name);
-    $('#mealInstructions').text(instructions)
     var mealPicture = $('<img>').addClass('img').attr('src', thumb);
+    var mealVid = $('<a>Click here for video recipe!</a>').attr('href', link).attr('target', '_blank');
     $('#mealPic').append(mealPicture);
+    $('#mealInstructions').append(mealVid);
 }
-
 //  function to create meal buttons
 function createMealButtons(mealName) {
     $('#inputMeal').val("");
@@ -106,6 +92,20 @@ function createMealButtons(mealName) {
         $("#logMeal").append(savedMealBtn);
     }
 };
+// pull searched meals from local storage
+function loadMeals() {
+    meals = JSON.parse(localStorage.getItem("meals"));
+    if (!meals) {
+        meals = [];
+    } else {
+        createMealButtons();
+    }
+};
+// save searched meals to local storage
+function saveMeals() {
+    localStorage.setItem("meals", JSON.stringify(meals));
+};
+
 // function to create drink buttons
 function createDrinkButtons() {
     $('#inputDrink').val("");
@@ -118,23 +118,65 @@ function createDrinkButtons() {
         $("#logDrink").append(savedDrinks);
     }
 };
-// save searched meals to local storage
-function saveMeals() {
-    localStorage.setItem("meals", JSON.stringify(meals));
+
+// load drink id from searched ingredient
+function loadDrinkId(input)  {
+    var drinkID = "";
+    var inputIngred = input;
+    const settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://the-cocktail-db.p.rapidapi.com/filter.php?i=" + inputIngred,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
+            "x-rapidapi-key": "d1da64892bmsh47c5b4a3453cdaap15ba00jsn958f359ad4d3"
+        }
+    };
+    
+    $.ajax(settings).done(function (response) {
+        var randomDrinkNum = Math.floor((Math.random() * response.drinks.length));
+        drinkId = response.drinks[randomDrinkNum].idDrink;
+        console.log(drinkId);
+        loadDrinkRecipe(drinkId);
+    });
 };
+// load meal recipe
+function loadDrinkRecipe(id)  {
+    const settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://the-cocktail-db.p.rapidapi.com/lookup.php?i=" + id,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
+            "x-rapidapi-key": "d1da64892bmsh47c5b4a3453cdaap15ba00jsn958f359ad4d3"
+        }
+    };
+    
+    $.ajax(settings).done(function (response) {
+        $('#drinkRecipeName').empty();
+        $('#drinkInstructions').empty();
+        $('#drinkPic').empty();
+        var mealName = response.drinks[0].strDrink;
+        var mealPic = response.drinks[0].strDrinkThumb;
+        var mealInstructions = response.drinks[0].strInstructions;
+        drinkRecipeEl(mealName, mealPic, mealInstructions);
+    });
+};
+// display information on drink el
+function drinkRecipeEl(name, thumb, inst)  {
+    $('#drinkRecipeName').text(name);
+    var drinkPicture = $('<img>').addClass('img').attr('src', thumb);
+    var drinkVid = inst;
+    $('#drinkPic').append(drinkPicture);
+    $('#drinkInstructions').append(drinkVid);
+}
 // save searched drinks to local storage
 function saveDrinks() {
     localStorage.setItem("drinks", JSON.stringify(drinks));
 };
-// pull searched meals from local storage
-function loadMeals() {
-    meals = JSON.parse(localStorage.getItem("meals"));
-    if (!meals) {
-        meals = [];
-    } else {
-        createMealButtons();
-    }
-};
+
 // pull searched drinks from local storage
 function loadDrinks() {
     drinks = JSON.parse(localStorage.getItem("drinks"));
@@ -159,11 +201,10 @@ $('#drinkForm').on('submit', function (event) {
     event.preventDefault();
     if (drinkSearch.val()) {
         var drinkInput = drinkSearch.val();
+        loadDrinkId(drinkInput);
         drinks.push(drinkInput);
-        saveDrinks();
         createDrinkButtons();
-        //loadDrinkId(mealInput);
-        console.log(drinks);
+        saveDrinks();
     } else {
         console.log("Temporary Error");
     }
@@ -186,8 +227,12 @@ $('#deleteDrink').on("click", function (event) {
 // listener for saved meals buttons
 $('#logMeal').on('click', 'button', function (event) {
     var savedName = $(this).text().trim();
-    console.log(savedName);
     loadSavedMeal(savedName);
+});
+// listener for saved drinks buttons
+$('#logDrink').on('click', 'button', function (event) {
+    var savedName = $(this).text().trim();
+    loadDrinkId(savedName);
 });
 loadMeals();
 loadDrinks();
