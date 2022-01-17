@@ -1,0 +1,16 @@
+.wrap-button-text {
+    height: max-content;
+    white-space: inherit;
+}
+
+img {
+    max-height:200px;
+    max-width:200px;
+    height:auto;
+    width:auto;
+}
+
+link  {
+    text-decoration: none;
+    color:black;
+}
