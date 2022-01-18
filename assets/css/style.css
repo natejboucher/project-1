@@ -1,0 +1,29 @@
+.wrap-button-text {
+    height: max-content;
+    white-space: inherit;
+}
+
+img {
+    max-height:200px;
+    max-width:200px;
+    height:auto;
+    width:auto;
+}
+
+link  {
+    text-decoration: none;
+    color:black;
+}
+
+.columns {
+    background-image: url("../images/carrots-kale-and-corn.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 80%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+

@@ -1,12 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safecation</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fridge to Feast</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
-    
+
+    <!-- Hero Top -->
+    <section class="container is-fluid hero mb-5 mt-2">
+        <div class="hero-body has-text-centered has-background-info">
+            <p class="titles is-size-1-desktop">Fridge to Feast</p>
+        </div>
+    </section>
+
+    <!-- Two Main Columns-->
+    <main class="columns is-centered">
+
+        <!--Meals-->
+        <div class="column is-5 has-background-primary m-2">
+            <form class="field has-addons" id="mealForm">
+                <div class="control">
+                    <input class="input" type="text" id="inputMeal" placeholder="Search Meal Ingredient">
+                </div>
+                <div class="control">
+                    <button class="button is-info" type="submit" id="submitMeal">Search</button>
+                    <button class="button is-danger" id="deleteMeal">Delete All</button>
+                </div>
+            </form>
+            <div class="columns mt-3">
+                <!-- Search results column-->
+                <div class="column is-quarter has-background-info-dark has-text-centered" id="logMeal">
+                    <!-- saved Meal searches-->
+                </div>
+                <!-- information columns-->
+                <div class="column is-three-quarters has-background-info has-text-centered" id="mealRecipe">
+                    <h1 id="mealRecipeName"></h1>
+                    <span id="mealPic"></span>
+                    <br />
+                    <span calss="link" id="mealInstructions"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drinks -->
+        <div class="column is-5 has-background-primary m-2">
+            <form class="field has-addons" id="drinkForm">
+                <div class="control">
+                    <input class="input" type="text" id="inputDrink" placeholder="Search Drink Ingredient">
+                </div>
+                <div class="control">
+                    <button class="button is-info" type="submit" id="submitDrink">Search</button>
+                    <button class="button is-danger" type="submit" id="deleteDrink">Delete All</button>
+                </div>
+            </form>
+            <div class="columns mt-3">
+                <!-- Search results column-->
+                <div class="column is-quarter has-background-info-dark has-text-centered" id="logDrink">
+                </div>
+                <!-- information columns-->
+                <div class="column is-three-quarters has-background-info has-text-centered" id="drinkRecipe">
+                    <h1 id="drinkRecipeName"></h1>
+                    <span id="drinkPic"></span>
+                    <br />
+                    <p calss="link" id="drinkInstructions"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
