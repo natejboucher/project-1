@@ -16,7 +16,7 @@ link  {
 }
 
 .columns {
-    background-image: url("../images/carrots-kale-and-corn.jpg");
+    background-image: url("../images/market-vegetables-on-table.jpg");
     background-size: cover;
     background-attachment: fixed;
     background-position: 80%;
@@ -27,3 +27,35 @@ link  {
 }
 
 
+.has-background-primary {
+    background-color: #6b2616!important;
+    box-shadow: 0 0 30px rgb(0 0 0 / .9);
+    border: 3px solid white;
+    border-radius: 5px;
+}
+
+
+.has-background-info-dark {
+    background-color: #946c00d6!important;
+    border: 2px solid white;
+    border-radius: 2px;
+    border-bottom: none;
+    border-left: none;
+}
+
+body {
+    color: white;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 2;
+}
+
+.has-background-info {
+    background-color: #4b696b!important;
+}
+
+.hero-body {
+    padding: 3rem 3rem;
+    border: 5px solid #946c00d6;
+    width: auto;
+}
