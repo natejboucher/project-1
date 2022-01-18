@@ -59,3 +59,11 @@ body {
     border: 5px solid #946c00d6;
     width: auto;
 }
+
+.button.is-primary.is-outlined {
+    background-color: #4b696b;
+    border-color: #4b696b;
+    border: 2px solid;
+    color: white; 
+
+}
