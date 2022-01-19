@@ -43,7 +43,6 @@ function loadSavedMeal(name) {
         var mealName = response.meals[0].strMeal;
         var mealPic = response.meals[0].strMealThumb;
         var mealLink = response.meals[0].strYoutube;
-        mealRecipeEl(mealName, mealPic, mealLink);
     });
 };
 // function to load meal recipe
@@ -62,23 +61,22 @@ function loadMealRecipe(mealId) {
     $.ajax(settings).done(function (response) {
         $('#mealRecipeName').empty();
         $('#mealInstructions').empty();
-        $('#mealPic').empty();
         var mealName = response.meals[0].strMeal;
-        var mealPic = response.meals[0].strMealThumb;
         var mealLink = response.meals[0].strYoutube;
         meals.push(mealName);
         saveMeals();
         createMealButtons();
-        mealRecipeEl(mealName, mealPic, mealInstructions);
+        mealRecipeEl(mealName, mealLink);
     });
 };
 // function to display recipe info on page
-function mealRecipeEl(name, thumb, link) {
+function mealRecipeEl(name, link) {
+    var linkSliced = link.slice("32");
+    var mealEmbed = 'https://www.youtube.com/embed/' + linkSliced;
+    var mealVid = $('<iframe width="560" height="315" src="'+mealEmbed+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
     $('#mealRecipeName').text(name);
-    var mealPicture = $('<img>').addClass('img').attr('src', thumb);
-    var mealVid = $('<a>Click here for video recipe!</a>').attr('href', link).attr('target', '_blank');
-    $('#mealPic').append(mealPicture);
     $('#mealInstructions').append(mealVid);
+    console.log(mealVid);
 }
 //  function to create meal buttons
 function createMealButtons(mealName) {
@@ -141,7 +139,8 @@ function loadDrinkId(input) {
         loadDrinkRecipe(drinkId);
     });
 };
-// load meal recipe
+
+// load drink recipe
 function loadDrinkRecipe(id) {
     const settings = {
         "async": true,
@@ -213,6 +212,9 @@ $('#drinkForm').on('submit', function (event) {
 $('#deleteMeal').on("click", function (event) {
     event.preventDefault();
     $('#logMeal').empty();
+    $('#mealRecipeName').empty();
+    $('#mealInstructions').empty();
+    $('#mealPic').empty();
     meals = [];
     localStorage.setItem('meals', JSON.stringify(meals));
 })
@@ -220,6 +222,9 @@ $('#deleteMeal').on("click", function (event) {
 $('#deleteDrink').on("click", function (event) {
     event.preventDefault();
     $('#logDrink').empty();
+    $('#mealRecipeName').empty();
+    $('#mealInstructions').empty();
+    $('#mealPic').empty();
     drinks = [];
     localStorage.setItem('drinks', JSON.stringify(drinks));
 })
