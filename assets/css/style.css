@@ -46,3 +46,17 @@ link  {
       height: 400px;
   }
   
+  .hero-color {
+    background-color: #4b696b;
+    box-shadow: 0 0 30px rgb(0 0 0/.9);
+    border-radius: 5px;
+    color: #f5f5f5;
+  }
+
+  .is-info {
+    background-color: #494449 !important;
+  }
+
+  .is-danger {
+    background-color: #494449 !important;
+  }
