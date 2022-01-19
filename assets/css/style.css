@@ -15,6 +15,54 @@ link  {
     color:black;
 }
 
+.search-bar {
+    background-color: #6b26168c;
+    box-shadow: 0 0 30px rgb(0 0 0 / .9);
+    border: 3px solid white;
+    border-radius: 5px;
+}
+
+
+.saved-section {
+    background-color: #946c0087;
+    border: 2px solid white;
+    border-radius: 2px;
+    border-left: none;
+}
+
+body {
+    color: white;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 2;
+    background-image: url("../images/market-vegetables-on-table.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 80%;
+}
+
+.bg-color {
+    background-color: #4b696b00;
+}
+
+.hero-body {
+    padding: 3rem 3rem;
+    border: 5px solid #946c00d6;
+    width: auto;
+}
+
+.button.is-primary.is-outlined {
+    background-color: #4b696b;
+    border-color: #4b696b;
+    border: 2px solid;
+    color: white; 
+}
+
+.border-bottom {
+  border-bottom: 5px solid #4b696b;
+  padding-bottom: 5px;
+}
+
 .video-container  {
     position: relative;
     width: 100%;

@@ -43,7 +43,6 @@ function loadSavedMeal(name) {
         var mealName = response.meals[0].strMeal;
         var mealPic = response.meals[0].strMealThumb;
         var mealLink = response.meals[0].strYoutube;
-        mealRecipeEl(mealName, mealLink);
     });
 };
 // function to load meal recipe
@@ -105,7 +104,6 @@ function saveMeals() {
     localStorage.setItem("meals", JSON.stringify(meals));
 };
 
-
 // function to create drink buttons
 function createDrinkButtons() {
     $('#inputDrink').val("");
@@ -141,6 +139,7 @@ function loadDrinkId(input) {
         loadDrinkRecipe(drinkId);
     });
 };
+
 // load drink recipe
 function loadDrinkRecipe(id) {
     const settings = {
