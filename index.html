@@ -13,17 +13,17 @@
 
     <!-- Hero Top -->
     <section class="container is-fluid hero mb-5 mt-2">
-        <div class="hero-body has-text-centered has-background-info">
+        <div class="hero-body has-text-centered">
             <p class="titles is-size-1-desktop">Fridge to Feast</p>
         </div>
     </section>
 
     <!-- Two Main Columns-->
-    <main class="columns is-centered">
+    <main class="columns  is-centered main-background">
 
         <!--Meals-->
-        <div class="column is-5 has-background-primary m-2">
-            <form class="field has-addons" id="mealForm">
+        <div class="column is-5 search-bar m-2">
+            <form class="field has-addons border-bottom" id="mealForm">
                 <div class="control">
                     <input class="input" type="text" id="inputMeal" placeholder="Search Meal Ingredient">
                 </div>
@@ -34,11 +34,11 @@
             </form>
             <div class="columns mt-3">
                 <!-- Search results column-->
-                <div class="column is-quarter has-background-info-dark has-text-centered" id="logMeal">
+                <div class="column is-quarter saved-section has-text-centered" id="logMeal">
                     <!-- saved Meal searches-->
                 </div>
                 <!-- information columns-->
-                <div class="column is-three-quarters has-background-info has-text-centered" id="mealRecipe">
+                <div class="column is-three-quarters bg-color has-text-centered" id="mealRecipe">
                     <h1 id="mealRecipeName"></h1>
                     <span id="mealPic"></span>
                     <br />
@@ -48,8 +48,8 @@
         </div>
 
         <!-- Drinks -->
-        <div class="column is-5 has-background-primary m-2">
-            <form class="field has-addons" id="drinkForm">
+        <div class="column is-5 search-bar m-2">
+            <form class="field has-addons border-bottom" id="drinkForm">
                 <div class="control">
                     <input class="input" type="text" id="inputDrink" placeholder="Search Drink Ingredient">
                 </div>
@@ -60,10 +60,10 @@
             </form>
             <div class="columns mt-3">
                 <!-- Search results column-->
-                <div class="column is-quarter has-background-info-dark has-text-centered" id="logDrink">
+                <div class="column is-quarter saved-section has-text-centered" id="logDrink">
                 </div>
                 <!-- information columns-->
-                <div class="column is-three-quarters has-background-info has-text-centered" id="drinkRecipe">
+                <div class="column is-three-quarters bg-color has-text-centered" id="drinkRecipe">
                     <h1 id="drinkRecipeName"></h1>
                     <span id="drinkPic"></span>
                     <br />

@@ -15,31 +15,18 @@ link  {
     color:black;
 }
 
-.columns {
-    background-image: url("../images/market-vegetables-on-table.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: 80%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: flex-start;
-}
-
-
-.has-background-primary {
-    background-color: #6b2616!important;
+.search-bar {
+    background-color: #6b26168c;
     box-shadow: 0 0 30px rgb(0 0 0 / .9);
     border: 3px solid white;
     border-radius: 5px;
 }
 
 
-.has-background-info-dark {
-    background-color: #946c00d6!important;
+.saved-section {
+    background-color: #946c0087;
     border: 2px solid white;
     border-radius: 2px;
-    border-bottom: none;
     border-left: none;
 }
 
@@ -48,10 +35,14 @@ body {
     font-size: 1em;
     font-weight: 600;
     line-height: 2;
+    background-image: url("../images/market-vegetables-on-table.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 80%;
 }
 
-.has-background-info {
-    background-color: #4b696b!important;
+.bg-color {
+    background-color: #4b696b00;
 }
 
 .hero-body {
@@ -66,4 +57,9 @@ body {
     border: 2px solid;
     color: white; 
 
+}
+
+.border-bottom {
+border-bottom: 5px solid #4b696b;
+padding-bottom: 5px;
 }
