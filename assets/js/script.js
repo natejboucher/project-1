@@ -43,6 +43,7 @@ function loadSavedMeal(name) {
         var mealName = response.meals[0].strMeal;
         var mealPic = response.meals[0].strMealThumb;
         var mealLink = response.meals[0].strYoutube;
+        mealRecipeEl(mealName, mealLink);
     });
 };
 // function to load meal recipe
@@ -73,7 +74,7 @@ function loadMealRecipe(mealId) {
 function mealRecipeEl(name, link) {
     var linkSliced = link.slice("32");
     var mealEmbed = 'https://www.youtube.com/embed/' + linkSliced;
-    var mealVid = $('<iframe width="560" height="315" src="'+mealEmbed+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+    var mealVid = $('<iframe width="460" height="315" src="'+mealEmbed+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
     $('#mealRecipeName').text(name);
     $('#mealInstructions').append(mealVid);
     console.log(mealVid);
@@ -103,6 +104,7 @@ function loadMeals() {
 function saveMeals() {
     localStorage.setItem("meals", JSON.stringify(meals));
 };
+
 
 // function to create drink buttons
 function createDrinkButtons() {
@@ -139,7 +141,6 @@ function loadDrinkId(input) {
         loadDrinkRecipe(drinkId);
     });
 };
-
 // load drink recipe
 function loadDrinkRecipe(id) {
     const settings = {
@@ -222,9 +223,9 @@ $('#deleteMeal').on("click", function (event) {
 $('#deleteDrink').on("click", function (event) {
     event.preventDefault();
     $('#logDrink').empty();
-    $('#mealRecipeName').empty();
-    $('#mealInstructions').empty();
-    $('#mealPic').empty();
+    $('#drinkRecipeName').empty();
+    $('#drinkInstructions').empty();
+    $('#drinkPic').empty();
     drinks = [];
     localStorage.setItem('drinks', JSON.stringify(drinks));
 })
